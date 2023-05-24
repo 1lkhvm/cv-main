@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import Revan from "../Img/revan.png"
+import IG from "../Img/ig.png"
+import fb from "../Img/fb.png"
+
+import axios from "axios";
 function Cv() {
+
+
+    const [post, setPost] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3030").then((response) => {
+            setPost(response.data);
+        });
+    }, []);
+
     return (
         <>
+
             <body>
                 <div class="resume">
                     <div class="base">
@@ -26,31 +41,22 @@ function Cv() {
                             Email: Revan.ibrahimov.h@gmail.com
                             LinkedIn: linkedin.com/in/rəvanibrahimov
                         </div>
-                        <div class="follow">
-                            <h3>Réseaux</h3>
-                            <div class="box">
-                                <a href="Bura Socıal medıa lınkı qoyula bıler"><i class="fa fa-facebook"></i></a>
-                                <a href="Bura Socıal medıa lınkı qoyula bıler" target="_blank"><i class="pif-plurkapp"></i></a>
-                                <a href="Bura Socıal medıa lınkı qoyula bıler"><i class="fa fa-twitter"></i></a>
-                                <a href="Bura Socıal medıa lınkı qoyula bıler"><i class="fa fa-pinterest-p"></i></a>
-                                <a href="Bura Socıal medıa lınkı qoyula bıler"><i class="fa fa-tumblr"></i></a>
-                                <a href="Bura Socıal medıa lınkı qoyula bıler" target="_blank"><i class="fa fa-codepen"></i></a>
-                            </div>
-                        </div>
                     </div>
                     <div class="func">
+
                         <div class="work">
                             <h3><i class="fa fa-briefcase"></i>Təcrübələrim</h3>
                             <ul>
-                                <li><span>Gənclərin Online Yay Məktəbi</span><small> AVQUST 2020-NOYABR 2020</small></li>
-                                <li><span>Könüllülük Akademiyası 5</span><small>OKTYABR 2021-DEKABR 2021</small></li>
-                                <li><span>A-dan Z-ye Python Dersleri</span><small>OKTYABR 2021</small></li>
-                                <li><span>Könüllülük Akademiyası 6</span><small>FEVRAL 2022-MAY 2022</small></li>
-                                <li><span>ACA Media</span><small>İYUN 2022-NOYABR 2022</small></li>
-                                <li><span>PASHABANK SYSTEM ADMİNSTRATOR</span><small>YANVAR 2023-NOW</small></li>
 
+                                {post.map((element) => {
+                                    return (
+                                        <li><span>{element.tecrubeleri}</span><small>{element.baslangictarixi}-{element.bitistarixi}</small></li>
+                                    )
+                                })}
                             </ul>
                         </div>
+
+
 
                         <div class="edu">
                             <h3><i class="fa fa-graduation-cap"></i>Təhsilim</h3>
@@ -124,19 +130,19 @@ function Cv() {
                         </div>
 
                         <div class="skills-soft">
-                            <h3><i class="fa fa-th-list"></i>Autres compétences</h3>
+                            <h3><i class="fa fa-th-list"></i>Bacarıqlarım</h3>
                             <ul>
                                 <li data-percent="94">
                                     <svg viewbox="0 0 100 100">
                                         <circle cx="50" cy="50" r="45"></circle>
                                         <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                                    </svg><span>Photoshop</span><small></small>
+                                    </svg><span>Windows</span><small></small>
                                 </li>
                                 <li data-percent="80">
                                     <svg viewbox="0 0 100 100">
                                         <circle cx="50" cy="50" r="45"></circle>
                                         <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                                    </svg><span>Illustrator</span><small></small>
+                                    </svg><span>Linux</span><small></small>
                                 </li>
                                 <li data-percent="89">
                                     <svg viewbox="0 0 100 100">
@@ -153,13 +159,13 @@ function Cv() {
                             </ul>
                         </div>
                         <div class="interests">
-                            <h3><i class="fa fa-star"></i>Hobbies</h3>
+                            <h3><i class="fa fa-star"></i>Hobilərim</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati labore, adipisci a, et ducimus non? Tenetur accusamus incidunt explicabo nobis ipsum, ratione temporibus eius est minus quis esse, vitae eos.</p>
                         </div>
                     </div>
                 </div>
 
-            </body>
+            </body >
 
         </>
     )
